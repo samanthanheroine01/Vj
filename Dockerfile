@@ -1,11 +1,16 @@
-FROM mysterysd/wzmlx:latest
+FROM python:3.10
 
+# Set the working directory
 WORKDIR /usr/src/app
-RUN chmod 777 /usr/src/app
 
-COPY requirements.txt .
-RUN pip3 install --no-cache-dir -r requirements.txt
+# Copy requirements file
+COPY requirements.txt ./
 
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of your application code
 COPY . .
 
-CMD ["bash", "start.sh"]
+# Command to run your application
+CMD ["python", "bot/init.py"]
